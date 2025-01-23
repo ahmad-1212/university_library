@@ -23,7 +23,7 @@ export const sendEmail = async ({
   await qstashClient.publishJSON({
     url: "https://api.mailjet.com/v3.1/send",
     body: {
-      from: "hello.ahmad@gmail.com",
+      from: "ahmadali.swat333@gmail.com",
       to: [email],
       subject,
       message,
