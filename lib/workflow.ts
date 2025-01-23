@@ -20,19 +20,37 @@ export const sendEmail = async ({
   subject: string;
   message: string;
 }) => {
-  await qstashClient.publishJSON({
-    url: "https://api.mailjet.com/v3.1/send",
-    body: {
-      from: "ahmadali.swat333@gmail.com",
-      to: [email],
-      subject,
-      message,
-    },
-    headers: {
-      Authorization: `Basic ${Buffer.from(
-        `${config.env.mailjet.apiKey}:${config.env.mailjet.secretKey}`
-      ).toString("base64")}`,
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    await qstashClient.publishJSON({
+      url: "https://api.mailjet.com/v3.1/send",
+      body: {
+        Messages: [
+          {
+            From: {
+              Email: "ahmadali.swat333@gmail.com",
+              Name: "Ahmad Ali",
+            },
+            To: [
+              {
+                Email: email,
+                Name: email, // Optional: recipient's name if available
+              },
+            ],
+            Subject: subject,
+            HTMLPart: message, // HTML content of the email
+          },
+        ],
+      },
+      headers: {
+        Authorization: `Basic ${Buffer.from(
+          `${config.env.mailjet.apiKey}:${config.env.mailjet.secretKey}`
+        ).toString("base64")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("Email successfully sent via QStash.");
+  } catch (error) {
+    console.error("Error sending email via QStash:", error);
+    throw new Error("Failed to send email.");
+  }
 };
