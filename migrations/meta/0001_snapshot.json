@@ -1,9 +1,112 @@
 {
-  "id": "8d4f4908-318a-4815-8060-0e037d773ac5",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "181dce12-7709-4814-b1f5-5c4d9794a9c5",
+  "prevId": "8d4f4908-318a-4815-8060-0e037d773ac5",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.books_table": {
+      "name": "books_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "author": {
+          "name": "author",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "genre": {
+          "name": "genre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rating": {
+          "name": "rating",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cover_url": {
+          "name": "cover_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cover_color": {
+          "name": "cover_color",
+          "type": "varchar(7)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "total_copies": {
+          "name": "total_copies",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "available_copies": {
+          "name": "available_copies",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "video_url": {
+          "name": "video_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "summary": {
+          "name": "summary",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "books_table_id_unique": {
+          "name": "books_table_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.users_table": {
       "name": "users_table",
       "schema": "",

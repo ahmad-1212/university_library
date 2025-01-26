@@ -1,0 +1,1 @@
+ALTER TABLE "books_table" ADD COLUMN "author" varchar(255) NOT NULL;

@@ -35,18 +35,17 @@ export const metadata: Metadata = {
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
   const session = await auth();
-  console.log(session);
   return (
-    <SessionProvider session={session}>
-      <html lang="en">
+    <html lang="en">
+      <SessionProvider session={session}>
         <body
           className={`${ibmPlexSans.className} ${bebasNeue.variable} antialiased`}
         >
           {children}
           <Toaster />
         </body>
-      </html>
-    </SessionProvider>
+      </SessionProvider>
+    </html>
   );
 };
 
