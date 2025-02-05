@@ -40,8 +40,8 @@ export const { POST } = serve<InitialData>(async (context) => {
   await context.run("borrowed-book", async () => {
     const template = emailTemplate.borrowedBook({
       name: fullName,
-      borrowDate: recordDetail.borrowDate,
-      dueDate: recordDetail.dueDate,
+      borrowDate: dayjs(recordDetail.borrowDate).format("MMM DD YYYY"),
+      dueDate: dayjs(recordDetail.dueDate).format("MMM DD YYYY"),
       bookTitle,
     });
     await sendEmail({
@@ -64,7 +64,7 @@ export const { POST } = serve<InitialData>(async (context) => {
     await context.run("send-email-reminder", async () => {
       const template = emailTemplate.bookReminder({
         name: fullName,
-        dueDate: recordDetail.dueDate,
+        dueDate: dayjs(recordDetail.dueDate).format("MMM DD YYYY"),
         bookTitle,
       });
       await sendEmail({

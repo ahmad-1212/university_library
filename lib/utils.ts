@@ -25,6 +25,9 @@ export const emailTemplate = {
       html {
         background-color: #1a1c2c !important;
       }
+    * {
+      color: white;
+      }
       body {
         background-color: #1a1c2c !important;
         color: #ffffff;
@@ -48,6 +51,7 @@ export const emailTemplate = {
         gap: 10px;
         font-size: 24px;
         font-weight: bold;
+        color: #ffffff;
       }
 
       .logo img {
@@ -142,6 +146,9 @@ export const emailTemplate = {
       html {
         background-color: #1a1c2c !important;
       }
+    * {
+      color: white;
+      }
       body {
         background-color: #1a1c2c !important;
         color: #ffffff;
@@ -165,6 +172,7 @@ export const emailTemplate = {
         gap: 10px;
         font-size: 24px;
         font-weight: bold;
+        color: #ffffff;
       }
 
       .logo img {
@@ -268,6 +276,9 @@ export const emailTemplate = {
       html {
         background-color: #1c1c28 !important;
       }
+      * {
+      color: white;
+      }
       body {
         background-color: #1c1c28 !important;
         color: #ffffff;
@@ -281,6 +292,7 @@ export const emailTemplate = {
         gap: 10px;
         font-size: 24px;
         font-weight: bold;
+        color: #ffffff;
       }
 
       .logo img {
@@ -376,6 +388,9 @@ export const emailTemplate = {
       html {
         background-color: #1a1c2c !important;
       }
+    * {
+      color: white;
+      }
       body {
         background-color: #1a1c2c !important;
         color: #ffffff;
@@ -399,6 +414,7 @@ export const emailTemplate = {
         gap: 10px;
         font-size: 24px;
         font-weight: bold;
+        color: #ffffff;
       }
 
       .logo img {
@@ -492,6 +508,9 @@ export const emailTemplate = {
       html {
         background-color: #1a1c2c !important;
       }
+    * {
+      color: white;
+      }
       body {
         background-color: #1a1c2c !important;
         color: #ffffff;
@@ -515,6 +534,7 @@ export const emailTemplate = {
         gap: 10px;
         font-size: 24px;
         font-weight: bold;
+        color: #ffffff;
       }
 
       .logo img {
