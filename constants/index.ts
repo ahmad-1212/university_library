@@ -1,17 +1,3 @@
-export const navigationLinks = [
-  {
-    href: "/library",
-    label: "Library",
-  },
-
-  {
-    img: "/icons/user.svg",
-    selectedImg: "/icons/user-fill.svg",
-    href: "/my-profile",
-    label: "My Profile",
-  },
-];
-
 export const adminSideBarLinks = [
   {
     img: "/icons/admin/home.svg",
@@ -78,14 +64,14 @@ export const userRoles = [
   {
     value: "user",
     label: "User",
-    bgColor: "bg-[#FDF2FA]",
-    textColor: "text-[#C11574]",
+    bgColor: "#FDF2FA",
+    textColor: "#C11574",
   },
   {
     value: "admin",
     label: "Admin",
-    bgColor: "bg-[#ECFDF3]",
-    textColor: "text-[#027A48]",
+    bgColor: "#ECFDF3",
+    textColor: "#027A48",
   },
 ];
 
@@ -93,19 +79,19 @@ export const borrowStatuses = [
   {
     value: "overdue",
     label: "Overdue",
-    bgColor: "bg-[#FFF1F3]",
-    textColor: "text-[#C01048]",
+    bgColor: "#FFF1F3",
+    textColor: "#C01048",
   },
   {
     value: "borrowed",
     label: "Borrowed",
-    bgColor: "bg-[#F9F5FF]",
-    textColor: "text-[#6941C6]",
+    bgColor: "#F9F5FF",
+    textColor: "#6941C6",
   },
   {
     value: "returned",
     label: "Returned",
-    bgColor: "bg-[#F0F9FF]",
-    textColor: "text-[#026AA2]",
+    bgColor: "#F0F9FF",
+    textColor: "#026AA2",
   },
 ];

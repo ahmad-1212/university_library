@@ -1,20 +1,25 @@
+import { Session } from "next-auth";
 import BookCard from "./BookCard";
+import { currentUserWithBorrowRecords } from "@/app/(root)/my-profile/page";
 
 interface Props {
-  title: string;
   books: Book[];
   containerClassName?: string;
+  session: Session | null;
 }
 
-const BookList = ({ title, books, containerClassName }: Props) => {
-  if (books.length < 2) return;
+const BookList = async ({ books, containerClassName, session }: Props) => {
+  const user = await currentUserWithBorrowRecords(session?.user?.id);
+  const records = user?.borrowRecords?.map((record) => ({
+    ...record,
+    book: record.bookId,
+  }));
   return (
     <section className={containerClassName}>
-      <h2 className="font-bebas-neue text-4xl text-light-100">{title} Books</h2>
       {
         <ul className="book-list">
           {books?.map((book: Book) => (
-            <BookCard key={book.id} {...book} />
+            <BookCard key={book.id} {...book} borrowedRecords={records} />
           ))}
         </ul>
       }

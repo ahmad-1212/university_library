@@ -1,7 +1,7 @@
 import { Client as WorkFlowClient } from "@upstash/workflow";
 import { Client as QStashClient } from "@upstash/qstash";
 import config from "./config";
-import { generateEmailTemplate } from "./utils";
+import { emailTemplate } from "./utils";
 
 export const workFlowClient = new WorkFlowClient({
   baseUrl: config.env.upstash.qstashUrl,
@@ -15,13 +15,14 @@ const qstashClient = new QStashClient({
 export const sendEmail = async ({
   email,
   subject,
-  message,
+  template,
 }: {
   email: string;
   subject: string;
-  message: string;
+  template: string;
 }) => {
   try {
+    console.log("Email Sent");
     await qstashClient.publishJSON({
       url: "https://api.mailjet.com/v3.1/send",
       body: {
@@ -38,7 +39,7 @@ export const sendEmail = async ({
               },
             ],
             Subject: subject,
-            HTMLPart: generateEmailTemplate(message), // HTML content of the email
+            HTMLPart: template, // HTML content of the email
           },
         ],
       },

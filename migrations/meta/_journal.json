@@ -22,6 +22,27 @@
       "when": 1737878347766,
       "tag": "0002_superb_greymalkin",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1738148973513,
+      "tag": "0003_bouncy_piledriver",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1738156250798,
+      "tag": "0004_blushing_magdalene",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1738691782485,
+      "tag": "0005_chubby_typhoid_mary",
+      "breakpoints": true
     }
   ]
 }

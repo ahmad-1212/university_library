@@ -5,6 +5,7 @@ import BorrowBook from "./BorrowBook";
 import { db } from "@/database/drizzle";
 import { eq } from "drizzle-orm";
 import { users } from "@/database/schema";
+import { currentUserWithBorrowRecords } from "@/app/(root)/my-profile/page";
 
 interface Props extends Book {
   userId: string;
@@ -32,10 +33,25 @@ const BookOverview = async ({
   const borrowingEligibility = {
     isEligible: availableCopies > 0 && user.status === "APPROVED",
     message:
-      availableCopies < 0
+      availableCopies === 0
         ? "Book is not available for borrowing"
-        : "You are not eligible to borrow this book",
+        : "You are not allowed to borrow this book until your account is approved!",
   };
+
+  let isBorrowedBook: BorrowRecord | undefined;
+
+  if (borrowingEligibility.isEligible) {
+    const userRecords = (await currentUserWithBorrowRecords(user.id))
+      ?.borrowRecords;
+    const foundRecord = userRecords?.find((record) => record.bookId.id === id);
+
+    if (foundRecord) {
+      isBorrowedBook = {
+        ...foundRecord,
+        book: foundRecord.bookId, // Fix: Convert bookId to book
+      } as BorrowRecord;
+    }
+  }
 
   return (
     <section className="book-overview">
@@ -68,6 +84,7 @@ const BookOverview = async ({
             userId={userId}
             bookId={id}
             borrowingEligibility={borrowingEligibility}
+            borrowedRecord={isBorrowedBook}
           />
         )}
       </div>

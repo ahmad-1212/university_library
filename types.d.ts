@@ -1,3 +1,5 @@
+type STATUS_BOOK_ENUM = "BORROWED" | "RETURNED";
+
 interface Book {
   id: string;
   title: string;
@@ -11,7 +13,19 @@ interface Book {
   coverUrl: string;
   videoUrl: string;
   summary: string;
-  isLoanedBook?: boolean;
+  createdAt: Date | null;
+}
+
+interface User {
+  id: string;
+  fullName: string;
+  email: string;
+  universityId: number;
+  universityCard: string;
+  status: "PENDING" | "APPROVED" | "REJECTED" | null;
+  role: "USER" | "ADMIN" | null;
+  createdAt: Date | null;
+  borrowedBooks?: number; // Add this for the borrowed books count
 }
 
 interface AuthCredentials {
@@ -38,4 +52,23 @@ interface BookParams {
 interface BorrowBookParams {
   bookId: string;
   userId: string;
+}
+
+interface BorrowRecord {
+  id: string;
+  userId?: string;
+  book: Partial<Book>;
+  borrowDate: Date;
+  dueDate: string;
+  returnDate: string | null;
+  status: STATUS_BOOK_ENUM;
+  createdAt: Date | null;
+  user?: Partial<User>;
+}
+
+interface SearchParams {
+  query?: string;
+  page?: string;
+  sort?: string;
+  filter?: string;
 }

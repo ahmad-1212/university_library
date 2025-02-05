@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.custom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+}
+
+.all-unset {
+  all: unset;
+}
+
 @layer base {
   :root {
     --radius: 0.5rem;
@@ -85,7 +94,7 @@
 
   /* Book List */
   .book-list {
-    @apply mt-10 flex flex-wrap gap-5 max-xs:justify-between xs:gap-10;
+    @apply flex flex-wrap gap-5 max-xs:justify-between xs:gap-10;
   }
 
   /* Book Overview */
@@ -199,12 +208,20 @@
     @apply flex flex-row justify-end gap-3;
   }
 
-  .pagination-btn_light {
-    @apply bg-light-300 text-dark-300 hover:bg-light-300/70 !important;
+  .pagination-btn_dark {
+    @apply bg-dark-300 text-light-100 rounded-sm hover:bg-primary hover:text-dark-300 aria-disabled:cursor-not-allowed aria-disabled:opacity-80 aria-disabled:pointer-events-none !important;
   }
 
-  .pagination-btn_dark {
-    @apply bg-dark-300 hover:bg-dark-100 !important;
+  .pagination-btn_dark.active {
+    @apply bg-primary text-dark-300 !important;
+  }
+
+  .pagination-btn_light {
+    @apply bg-gray-200 hover:bg-light-400 !important;
+  }
+
+  .pagination-btn_light.active {
+    @apply bg-primary-admin text-light-100 !important;
   }
 
   #pagination p {
@@ -222,6 +239,14 @@
 
   .select-item {
     @apply focus:bg-dark-600 focus:text-light-100 !important;
+  }
+
+  .badge {
+    @apply bg-dark-700 h-[4.5rem] w-12  rounded-b-full flex items-end justify-center pb-4;
+  }
+
+  .badge span {
+    @apply h-2 w-8 block rounded-full bg-dark-300;
   }
 }
 

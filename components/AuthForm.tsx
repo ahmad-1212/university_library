@@ -24,11 +24,14 @@ import FileUpload from "./FileUpload";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Spinner from "./ui/spinner";
 
 interface Props<T extends FieldValues> {
   schema: ZodType<T>;
   defaultValues: T;
-  onSubmit: (data: T) => Promise<{ success: boolean; error?: string }>;
+  onSubmit: (
+    data: T
+  ) => Promise<{ success: boolean; error?: string; type?: string }>;
   type: "SIGN_IN" | "SIGN_UP";
 }
 
@@ -65,6 +68,13 @@ const AuthForm = <T extends FieldValues>({
           message: result.error,
         });
         form.setError("password" as Path<T>, {
+          type: "string",
+          message: result.error,
+        });
+      }
+
+      if (result?.type && result?.type?.toLowerCase() !== "error") {
+        form.setError(result.type as Path<T>, {
           type: "string",
           message: result.error,
         });
@@ -128,9 +138,12 @@ const AuthForm = <T extends FieldValues>({
 
           <Button
             type="submit"
-            className="form-btn disabled:cursor-not-allowed"
+            className="form-btn disabled:cursor-not-allowed flex items-center gap-2"
             disabled={isLoading}
           >
+            {isLoading ? (
+              <Spinner variant="black" className="border-2" />
+            ) : null}
             {isSignIn ? "Sign In" : "Sign Up"}
           </Button>
         </form>

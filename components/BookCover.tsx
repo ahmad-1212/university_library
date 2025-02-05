@@ -31,7 +31,7 @@ const BookCover = ({
   return (
     <div
       className={cn(
-        "relative translate-all duration-200",
+        "relative translate-all duration-200  rounded-tl-xl rounded-bl-xl",
         variantStyles[variant],
         className
       )}

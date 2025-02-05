@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "@/hooks/use-toast";
 import { borrowBook } from "@/lib/actions/book";
+import BorrowedBookStatus from "./BorrowedBookStatus";
 
 interface Props {
   bookId: string;
@@ -14,17 +15,21 @@ interface Props {
     isEligible: boolean;
     message: string;
   };
+  borrowedRecord?: BorrowRecord;
 }
 
 const BorrowBook = ({
   bookId,
   userId,
   borrowingEligibility: { isEligible, message },
+  borrowedRecord,
 }: Props) => {
   const [borrowing, setBorrowing] = useState<boolean>(false);
   const router = useRouter();
+  const isReturned = borrowedRecord?.status === "RETURNED";
 
   const handleBorrow = async () => {
+    console.log(isEligible);
     if (!isEligible) {
       return toast({
         title: "Error",
@@ -61,6 +66,18 @@ const BorrowBook = ({
       setBorrowing(false);
     }
   };
+
+  if (borrowedRecord && !isReturned) {
+    return (
+      <div>
+        <BorrowedBookStatus
+          status={borrowedRecord.status}
+          dueDate={borrowedRecord.dueDate}
+        />
+        <Button className="book-overview_btn">Upload Receipt</Button>
+      </div>
+    );
+  }
 
   return (
     <Button

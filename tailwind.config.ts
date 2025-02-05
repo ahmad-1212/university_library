@@ -106,6 +106,9 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      boxShadow: {
+        xl: "0px 12px 26px 8px rgba(0,0,0,0.4)",
+      },
       backgroundImage: {
         pattern: "url('/images/pattern.webp')",
       },

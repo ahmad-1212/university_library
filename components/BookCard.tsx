@@ -1,8 +1,12 @@
 import Link from "next/link";
 import BookCover from "./BookCover";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { Button } from "./ui/button";
+import BorrowedBookStatus from "./BorrowedBookStatus";
+
+interface Props extends Book {
+  borrowedRecords?: BorrowRecord[];
+}
 
 const BookCard = ({
   id,
@@ -10,36 +14,40 @@ const BookCard = ({
   genre,
   coverColor,
   coverUrl,
-  isLoanedBook = false,
-}: Book) => (
-  <li className={cn(isLoanedBook && "xs:w-52 w-full")}>
-    <Link
-      href={`/books/${id}`}
-      className={cn(isLoanedBook && "w-full flex flex-col items-center")}
-    >
-      <BookCover coverColor={coverColor} coverImage={coverUrl} />
+  borrowedRecords,
+}: Props) => {
+  // Check if the book is borrowed
+  const isBorrowed = borrowedRecords?.find(
+    (record: BorrowRecord) => record.book.id === id
+  );
 
-      <div className={cn("mt-4", !isLoanedBook && "xs:max-w-40 max-w-28")}>
-        <p className="book-title">{title}</p>
-        <p className="book-genre">{genre}</p>
-      </div>
+  // check if the borrowed book is returned or not
+  const isReturned = isBorrowed?.status === "RETURNED";
+  return (
+    <li className={cn(isBorrowed && "xs:w-52 w-full")}>
+      <Link
+        href={`/books/${id}`}
+        className={cn(isBorrowed && "w-full flex flex-col items-center")}
+      >
+        <BookCover coverColor={coverColor} coverImage={coverUrl} />
 
-      {isLoanedBook && (
-        <div className="mt-3 w-full">
-          <div className="book-loaned">
-            <Image
-              src="/icons/calendar.svg"
-              alt="calendar"
-              width={18}
-              height={18}
-            />
-            <p className="text-light-100 ">11 days left to return</p>
-          </div>
-          <Button className="book-btn ">Upload receipt</Button>
+        <div className={cn("mt-4", !isBorrowed && "xs:max-w-40 max-w-28")}>
+          <p className="book-title">{title}</p>
+          <p className="book-genre">{genre}</p>
         </div>
-      )}
-    </Link>
-  </li>
-);
+
+        {isBorrowed && !isReturned && (
+          <div className="mt-3 w-full">
+            <BorrowedBookStatus
+              dueDate={isBorrowed.dueDate}
+              status={isBorrowed.status}
+            />
+            <Button className="book-btn ">Upload receipt</Button>
+          </div>
+        )}
+      </Link>
+    </li>
+  );
+};
 
 export default BookCard;

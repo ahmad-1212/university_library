@@ -25,7 +25,7 @@
   }
 
   .confirm-content {
-    @apply sm:max-w-md flex flex-col items-center justify-center p-6 !important;
+    @apply sm:max-w-md flex flex-col items-center justify-center !important;
   }
 
   .confirm-illustration {
@@ -51,7 +51,7 @@
 
   /* Home Page */
   .view-btn {
-    @apply bg-light-300 rounded-md text-primary-admin font-semibold hover:bg-light-300/80 shadow-none !important;
+    @apply bg-light-300 rounded-md text-primary-admin font-semibold hover:bg-light-300/80 shadow-none px-4 py-1 !important;
   }
 
   .add-new-book_btn {
@@ -97,7 +97,7 @@
   }
 
   .book-stripe .author p:first-child {
-    @apply text-light-500 text-sm line-clamp-1;
+    @apply text-light-500 text-xs line-clamp-1;
   }
 
   .book-stripe .author div {
@@ -105,7 +105,7 @@
   }
 
   .book-stripe .author p:last-child {
-    @apply text-light-500 text-sm;
+    @apply text-light-500 text-xs;
   }
 
   .book-stripe .user {

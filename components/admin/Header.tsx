@@ -1,7 +1,12 @@
 import { Session } from "next-auth";
 import React from "react";
+import Search from "../Search";
 
-const Header = ({ session }: { session: Session }) => {
+interface Props {
+  session: Session;
+}
+
+const Header = async ({ session }: Props) => {
   return (
     <header className="admin-header">
       <div>
@@ -12,7 +17,10 @@ const Header = ({ session }: { session: Session }) => {
           Monitor all of your users and books here
         </p>
       </div>
-      <p>Search</p>
+      <Search
+        isAdmin={true}
+        placeholder="Search users, books by title, author, or genre"
+      />
     </header>
   );
 };

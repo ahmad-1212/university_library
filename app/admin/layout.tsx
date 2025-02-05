@@ -11,6 +11,7 @@ import { eq } from "drizzle-orm";
 
 const Layout = async ({ children }: { children: ReactNode }) => {
   const session = await auth();
+
   if (!session?.user?.id) return redirect("/sign-in");
 
   const isAdmin = await db
@@ -20,7 +21,6 @@ const Layout = async ({ children }: { children: ReactNode }) => {
     .limit(1)
     .then((res) => res[0]?.isAdmin === "ADMIN");
 
-  console.log(isAdmin);
   if (!isAdmin) return redirect("/");
 
   return (
