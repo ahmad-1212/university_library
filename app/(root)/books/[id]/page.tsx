@@ -33,7 +33,6 @@ const fetchBook = (bookId: string): Promise<Book> => {
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const session = await auth();
-
   const bookDetails = await fetchBook(id); // Fetching book details with cache
 
   return (

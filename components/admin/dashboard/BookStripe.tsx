@@ -41,20 +41,16 @@ const BookStripe = ({
       <div className="flex-1">
         <div className="flex justify-between">
           <h2 className="title">{title}</h2>
-          <Link
-            href={
-              showBorrowedUser
-                ? `/admin/borrow-records?query=${fullName}`
-                : `/admin/books/${id}`
-            }
-          >
-            <Image
-              src="/icons/admin/eye.svg"
-              width={15}
-              height={15}
-              alt="view"
-            />
-          </Link>
+          {showBorrowedUser && (
+            <Link href={`/admin/borrow-records?query=${fullName}`}>
+              <Image
+                src="/icons/admin/eye.svg"
+                width={15}
+                height={15}
+                alt="view"
+              />
+            </Link>
+          )}
         </div>
         <div className="author">
           <p>By {author}</p>

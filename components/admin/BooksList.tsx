@@ -14,7 +14,12 @@ import Link from "next/link";
 import BookAction from "./BookAction";
 
 const BooksList = ({ books }: { books: Partial<Book>[] }) => {
-  if (books.length === 0) return <div>No books found</div>;
+  if (books.length === 0)
+    return (
+      <div className="text-xl font-semibold text-center py-10">
+        No books found!
+      </div>
+    );
   return (
     <Table>
       <TableHeader className="">

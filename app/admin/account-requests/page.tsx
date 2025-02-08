@@ -9,18 +9,22 @@ export const getRequestedUsers = async ({
   query,
   page = 1,
   limit,
+  condition,
 }: {
   query?: string;
   page?: number;
   limit: number;
+  condition?: any;
 }): Promise<{ total: number; usersList: User[] }> => {
-  const searchCondition = or(ilike(users.fullName, `%${query}%`));
+  const searchCondition = condition
+    ? condition
+    : or(ilike(users.fullName, `%${query}%`));
   const [total, requestedUsers] = await Promise.all([
     db.$count(users, query ? searchCondition : undefined),
     db
       .select()
       .from(users)
-      .where(query ? searchCondition : undefined)
+      .where(query || condition ? searchCondition : undefined)
       .orderBy(desc(users.createdAt))
       .limit(limit)
       .offset((page - 1) * limit),
@@ -50,7 +54,11 @@ const Page = async ({
       <h2 className="font-bold text-xl">Account Registration Requests</h2>
 
       {/* Requested Users List */}
-      <RequestedUsersList users={usersList} />
+      {usersList.length > 0 ? (
+        <RequestedUsersList users={usersList} />
+      ) : (
+        <div className="text-xl text-center my-20">No Users Found</div>
+      )}
       {totalPages > 1 && (
         <AppPagination totalPages={totalPages} variant="light" />
       )}

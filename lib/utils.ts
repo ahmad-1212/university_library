@@ -617,6 +617,125 @@ export const emailTemplate = {
 </html>
 
   `,
+
+  bookReturn: (name: string, bookTitle: string) => `
+  <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanks For Returning the Book!</title>
+    <style>
+      html {
+        background-color: #1a1c2c !important;
+      }
+    * {
+      color: white;
+      }
+      body {
+        background-color: #1a1c2c !important;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .email-container {
+        background-color: #1a1c2c;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: left;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #ffffff;
+      }
+
+      .logo img {
+        width: 30px;
+        height: 30px;
+      }
+
+      hr {
+        border: 0;
+        border-top: 1px solid #333;
+        margin: 20px 0;
+      }
+
+      h1 {
+        font-size: 22px;
+        color: #ffffff;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #cccccc;
+      }
+
+      .btn {
+        all: unset;
+        display: inline-block;
+        background-color: #f4c38e !important;
+        color: #000000 !important;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .footer {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #cccccc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="email-container">
+      <div class="logo">
+        <img
+          src="https://uni-library-management-system.vercel.app/icons/logo.svg"
+          alt="BookWise Logo"
+        />
+        BookWise
+      </div>
+
+      <hr />
+
+      <h1>Thank you for Returning ${bookTitle}</h1>
+
+      <p>Hi ${name},</p>
+
+      <p>
+        We’ve successfully received your return of <strong> ${bookTitle}</strong>. Thank you for returning it on time.
+      </p>
+
+      <p>Looking for your next read? Browse our collection and borrow your next favorite book!</p>
+
+      <a
+        href="https://university-library-z18n-pi.vercel.app/"
+        class="btn"
+        >Explore New Books</a
+      >
+
+      <div class="footer">
+        <p>Happy Exploring,<br />The BookWise Team</p>
+      </div>
+    </div>
+  </body>
+</html>
+
+  `,
 };
 
 /**

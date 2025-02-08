@@ -32,7 +32,7 @@ const Page = async ({
             </div>
           }
         >
-          <SearchedBooks query={query} limit={LIMIT} page={page} />
+          <SearchedBooks query={query} limit={LIMIT} page={page || "1"} />
         </Suspense>
       )}
     </>

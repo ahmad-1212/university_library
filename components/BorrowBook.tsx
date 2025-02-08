@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "@/hooks/use-toast";
 import { borrowBook } from "@/lib/actions/book";
 import BorrowedBookStatus from "./BorrowedBookStatus";
+import Receipt from "./Receipt/Receipt";
 
 interface Props {
   bookId: string;
@@ -27,7 +28,6 @@ const BorrowBook = ({
   const [borrowing, setBorrowing] = useState<boolean>(false);
   const router = useRouter();
   const isReturned = borrowedRecord?.status === "RETURNED";
-
   const handleBorrow = async () => {
     console.log(isEligible);
     if (!isEligible) {
@@ -39,31 +39,21 @@ const BorrowBook = ({
     }
 
     setBorrowing(true);
+    const result = await borrowBook({ bookId, userId });
+    setBorrowing(false);
+    if (result.success) {
+      toast({
+        title: "Success",
+        description: "Book borrowed successfully",
+      });
 
-    try {
-      const result = await borrowBook({ bookId, userId });
-
-      if (result.success) {
-        toast({
-          title: "Success",
-          description: "Book borrowed successfully",
-        });
-        router.push("/my-profile");
-      } else {
-        toast({
-          title: "Error",
-          description: result.error,
-          variant: "destructive",
-        });
-      }
-    } catch (err: any) {
+      router.push("/my-profile");
+    } else {
       toast({
         title: "Error",
-        description: message,
+        description: result.error,
         variant: "destructive",
       });
-    } finally {
-      setBorrowing(false);
     }
   };
 
@@ -74,7 +64,16 @@ const BorrowBook = ({
           status={borrowedRecord.status}
           dueDate={borrowedRecord.dueDate}
         />
-        <Button className="book-overview_btn">Upload Receipt</Button>
+        <Receipt
+          bookAuthor={borrowedRecord.book.author!}
+          bookGenre={borrowedRecord.book.genre!}
+          bookTitle={borrowedRecord.book.title!}
+          borrowDate={borrowedRecord.borrowDate!}
+          dueDate={borrowedRecord.dueDate!}
+          receiptId={borrowedRecord.id!}
+        >
+          <a className="book-overview_btn block">Upload Receipt</a>
+        </Receipt>
       </div>
     );
   }

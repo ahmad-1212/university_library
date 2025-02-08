@@ -11,12 +11,20 @@ import dayjs from "dayjs";
 import BookReturnStatus from "./BookReturnStatus";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { getInitials } from "@/lib/utils";
+import Receipt from "../Receipt/Receipt";
+import Image from "next/image";
 
 const BorrowedBooksList = ({
   borrowRecords,
 }: {
   borrowRecords: BorrowRecord[];
 }) => {
+  if (borrowRecords.length === 0)
+    return (
+      <div className="text-xl font-semibold text-center py-10">
+        No Records found!
+      </div>
+    );
   return (
     <Table>
       <TableHeader className="">
@@ -89,7 +97,29 @@ const BorrowedBooksList = ({
               <BookReturnStatus record={record} />
             </TableCell>
 
-            <TableCell className="font-medium">book receipt</TableCell>
+            <TableCell className="font-medium">
+              <Receipt
+                bookAuthor={record.book.author!}
+                bookGenre={record.book.genre!}
+                bookTitle={record.book.title!}
+                borrowDate={record.borrowDate!}
+                dueDate={record.dueDate!}
+                receiptId={record.id!}
+              >
+                <a
+                  aria-disabled={record.status === "RETURNED" ? true : false}
+                  className="bg-primary-admin/5 rounded-sm py-1 px-2 flex items-center gap-1 shadow-sm aria-disabled:opacity-50 aria-disabled:cursor-not-allowed"
+                >
+                  <Image
+                    src="/icons/admin/receipt.svg"
+                    width={12}
+                    height={12}
+                    alt="receipt"
+                  />
+                  <span>Generate</span>
+                </a>
+              </Receipt>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

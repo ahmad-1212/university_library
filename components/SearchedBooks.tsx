@@ -89,7 +89,7 @@ const SearchedBooks = async ({ query, page, limit }: Props) => {
             different keywords or check for typos.
           </p>
           {/* Reset search form button */}
-          <SearchFormReset path="/books/search" formSelector=".search">
+          <SearchFormReset path="/books/search">
             <Button type="reset" className="not-found-btn">
               Clear Search
             </Button>

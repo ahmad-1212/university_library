@@ -9,7 +9,7 @@ const RecentBooks = async () => {
   await new Promise((res) => setTimeout(res, 1000));
 
   return (
-    <section className="flex flex-col gap-10 bg-white p-5 rounded-lg">
+    <section className="flex flex-1 flex-col gap-10 bg-white p-5 rounded-lg">
       <div>
         <h2 className="text-xl font-bold">Recently added Books</h2>
       </div>

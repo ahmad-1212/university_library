@@ -3,6 +3,7 @@ import BookCover from "./BookCover";
 import Image from "next/image";
 import dayjs from "dayjs";
 import BorrowedBookStatus from "./BorrowedBookStatus";
+import Receipt from "./Receipt/Receipt";
 
 const BorrowedBookDetail = ({
   borrowDate,
@@ -10,6 +11,7 @@ const BorrowedBookDetail = ({
   returnDate,
   status,
   book,
+  id,
 }: BorrowRecord) => (
   <li key={book.id} className="p-5 rounded-xl flex flex-col gap-5 bg-dark-100">
     <div
@@ -44,15 +46,27 @@ const BorrowedBookDetail = ({
           returnDate={returnDate}
         />
         <div
-          className="p-1 rounded-sm cursor-pointer"
+          className="p-1 rounded-sm "
           style={{ backgroundColor: `${book.coverColor}80` }}
         >
-          <Image
-            src="/icons/receipt.svg"
-            alt="receipt"
-            width={15}
-            height={15}
-          />
+          <Receipt
+            bookAuthor={book.author!}
+            bookGenre={book.genre!}
+            bookTitle={book.title!}
+            borrowDate={dayjs(borrowDate).format("MMM DD YYYY")}
+            dueDate={dayjs(dueDate).format("MMM DD YYYY")}
+            receiptId={id}
+            disabled={status === "RETURNED" && true}
+          >
+            <a>
+              <Image
+                src="/icons/receipt.svg"
+                width={15}
+                height={15}
+                alt="receipt"
+              />
+            </a>
+          </Receipt>
         </div>
       </div>
     </div>

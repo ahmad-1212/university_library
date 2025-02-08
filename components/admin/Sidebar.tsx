@@ -9,6 +9,7 @@ import React from "react";
 import { Avatar } from "../ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Session } from "next-auth";
+import Logout from "./Logout";
 
 const Sidebar = ({ session }: { session: Session }) => {
   const pathName = usePathname();
@@ -67,9 +68,12 @@ const Sidebar = ({ session }: { session: Session }) => {
           </AvatarFallback>
         </Avatar>
 
-        <div className="flex flex-col max-md:hidden">
-          <p>{session?.user?.name}</p>
-          <p>{session?.user?.email}</p>
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex flex-col max-md:hidden">
+            <h3 className="text-sm font-semibold">{session?.user?.name}</h3>
+            <p className="text-xs">{session?.user?.email}</p>
+          </div>
+          <Logout />
         </div>
       </div>
     </aside>

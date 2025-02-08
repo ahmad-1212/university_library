@@ -16,6 +16,7 @@ export const signInWithCredentials = async (
 ) => {
   const { email, password } = params;
 
+  // Extract IP address for ratelimiting
   const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
 
   const { success } = await ratelimit.limit(ip);
@@ -42,16 +43,21 @@ export const signInWithCredentials = async (
 export const signUp = async (
   params: AuthCredentials
 ): Promise<{ success: boolean; error?: string; type?: string }> => {
+  // 1. Extract data from params
   const { fullName, email, universityCard, password, universityId } = params;
 
+  // 2. Extract IP address for ratelimiting
   const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
 
+  // 3. Check ratelimiting if too many request redirect to /too-fast
   const { success } = await ratelimit.limit(ip);
 
   if (!success) return redirect("/too-fast");
 
+  // 4. Hash password
   const hashedPassword = await hash(password, 10);
 
+  // 5. Add User to db
   try {
     await db.insert(users).values({
       fullName,
@@ -61,6 +67,7 @@ export const signUp = async (
       password: hashedPassword,
     });
 
+    // 6. Start onboarding workflow
     await workFlowClient.trigger({
       url: `${config.env.prodApiEndpoint}/api/workflow/onboarding`,
       body: {
@@ -69,6 +76,7 @@ export const signUp = async (
       },
     });
 
+    // 7. When everything success signin the user
     await signInWithCredentials({ email, password });
     return { success: true };
   } catch (err: unknown) {

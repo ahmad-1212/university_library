@@ -10,7 +10,12 @@ import { useState } from "react";
 import { logOut } from "@/lib/actions/auth";
 import Spinner from "./ui/spinner";
 
-const Header = ({ session }: { session: Session }) => {
+interface Props {
+  session: Session;
+  userRole: "ADMIN" | "USER" | null;
+}
+
+const Header = ({ session, userRole }: Props) => {
   const pathName = usePathname();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -40,6 +45,18 @@ const Header = ({ session }: { session: Session }) => {
             Home
           </Link>
         </li>
+        {userRole === "ADMIN" && (
+          <li>
+            <Link
+              href="/admin"
+              className={cn(
+                "text-base cursor-pointer capitalize text-light-100"
+              )}
+            >
+              Dashboard
+            </Link>
+          </li>
+        )}
         <li>
           <Link
             href="/books/search"

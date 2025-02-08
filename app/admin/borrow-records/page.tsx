@@ -80,7 +80,9 @@ const Page = async ({
       <h2 className="font-bold text-xl">Borrow Book Requests</h2>
 
       {/* Borrowed Books List */}
+
       <BorrowedBooksList borrowRecords={list as BorrowRecord[]} />
+
       {totalPages > 1 && (
         <AppPagination totalPages={totalPages} variant="light" />
       )}

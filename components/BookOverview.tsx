@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Button } from "./ui/button";
 import BookCover from "./BookCover";
 import BorrowBook from "./BorrowBook";
 import { db } from "@/database/drizzle";
@@ -43,7 +42,9 @@ const BookOverview = async ({
   if (borrowingEligibility.isEligible) {
     const userRecords = (await currentUserWithBorrowRecords(user.id))
       ?.borrowRecords;
-    const foundRecord = userRecords?.find((record) => record.bookId.id === id);
+    const foundRecord = userRecords?.find(
+      (record) => record.bookId.id === id && record.status === "BORROWED"
+    );
 
     if (foundRecord) {
       isBorrowedBook = {
