@@ -15,6 +15,8 @@
 
   <h3 align="center">A University Library Management System with Admin Panel</h3>
 
+  <h3><a href='https://uni-library-management-system.vercel.app'>LIVE SITE</a></h3>
+
 </div>
 
 ## 📋 <a name="table">Table of Contents</a>
@@ -107,8 +109,8 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/adrianhajdin/university-library-jsm.git
-cd university-library-jsm
+git clone https://github.com/ahmad-1212/university_library.git
+cd university-library
 ```
 
 **Installation**
